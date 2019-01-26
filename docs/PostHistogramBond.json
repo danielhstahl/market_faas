@@ -1,0 +1,44 @@
+{
+    "additionalProperties": false,
+    "properties":{
+        "t":{
+            "type": "integer",
+            "example": 10,
+            "description": "Simulate to (days)"
+        },
+        "r0":{
+            "type": "number",
+            "example": 0.04,
+            "description": "Current short rate"
+        },
+        "a":{
+            "type": "number",
+            "example": 0.3,
+            "description": "Mean reversion"
+        },
+        "b":{
+            "type": "number",
+            "example": 0.05,
+            "description": "Long run average rate"
+        },
+        "sigma":{
+            "type": "number",
+            "example": 0.05,
+            "description": "Volatility of rate"
+        },
+        "maturity":{
+            "type": "number",
+            "example": 1.0,
+            "description": "Bond maturity (years)"
+        }
+    },
+    "required": [
+        "t",
+        "r0",
+        "a",
+        "b",
+        "sigma",
+        "maturity"
+    ],
+    "type": "object"
+}

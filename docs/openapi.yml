@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  title: Market Risk Demo
+  description: Demonstration for finding the histogram for several interest rate sensitive assets.
+  version: '1'
+
+servers:
+  - url: ##CHANGE
+    description: Production server
+
+paths:
+  /v1/market/histogram/bond:
+    post:
+      summary: Computes the histogram for bond prices
+      description: Computes the histogram for bond prices
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramBond.json'
+  /v1/market/histogram/edf:
+    post:
+      summary: Computes the histogram for Euro Dollar Future prices
+      description: Computes the histogram for Euro Dollar Future prices
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramEDF.json'
+  /v1/market/histogram/bondcall:
+    post:
+      summary: Computes the histogram for call options on zero-coupon bonds
+      description: Computes the histogram for call options on zero-coupon bonds
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramBondOption.json'
+  /v1/market/histogram/bondput:
+    post:
+      summary: Computes the histogram for put options on zero-coupon bonds
+      description: Computes the histogram for put options on zero-coupon bonds
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramBondOption.json'
+  /v1/market/histogram/caplet:
+    post:
+      summary: Computes the histogram for caplets
+      description: Computes the histogram for caplets
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramCaplet.json'
+  /v1/market/histogram/swap:
+    post:
+      summary: Computes the histogram for swaps
+      description: Computes the histogram for swaps
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramSwap.json'
+  /v1/market/histogram/swaption:
+    post:
+      summary: Computes the histogram for European payer swaptions
+      description: Computes the histogram for European payer swaptions
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramSwaption.json'
+  /v1/market/histogram/americanswaption:
+    post:
+      summary: Computes the histogram for American payer swaptions
+      description: Computes the histogram for American payer swaptions
+      responses: 
+        '200':
+          description: Histogram
+          content:
+            application/json: 
+              schema:
+                $ref: './PostHistogramResponse.json'
+              example:
+                $ref: './PostHistogramExampleResponse.json'
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json: 
+              schema:
+                $ref: './ErrorResponse.json'        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './PostHistogramSwaption.json'

@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Credit Risk Demo
+  description: Demonstration for finding the density of a credit portfolio
+  version: '1'
+servers:
+  - url: null
+    description: Production server
+paths:
+  /v1/credit/density:
+    post:
+      summary: Computes the loss density of a loan portfolio
+      description: Computes the loss density of a loan portfolio
+      responses:
+        '200':
+          description: Density at points
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    density:
+                      type: number
+                    at_point:
+                      type: number
+                  required:
+                    - density
+                    - at_point
+                  additionalProperties: false
+              example:
+                - density: 5
+                  at_point: 0
+                - density: 3
+                  at_point: 1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  err:
+                    type: string
+                required:
+                  - err
+                additionalProperties: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                lambda:
+                  type: number
+                  example: 0.05
+                q:
+                  type: number
+                  example: 0.05
+                numU:
+                  type: integer
+                  example: 128
+                pd:
+                  type: number
+                  example: 0.02
+                numLoans:
+                  type: integer
+                  example: 100000
+                volatility:
+                  type: number
+                  example: 0.5
+              required:
+                - lambda
+                - q
+                - numU
+                - pd
+                - numLoans
+                - volatility
+              type: object

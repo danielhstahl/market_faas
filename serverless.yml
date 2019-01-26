@@ -1,0 +1,23 @@
+service: market-faas
+provider:
+  name: aws
+  runtime: provided
+  stage: prd
+
+package:
+  individually: true #needed to name each binary "bootstrap"
+functions:
+  calculator:
+    handler: doesntmatter #because runtime is provided
+    package:
+      artifact: market_faas.zip
+    events:
+      - http:
+          path: v1/market/histogram/{asset}
+          method: post
+          cors: true
+          request:
+            parameters:
+              paths:
+                asset: true
+  
