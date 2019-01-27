@@ -6,7 +6,7 @@ info:
     assets.
   version: '1'
 servers:
-  - url: null
+  - url: 'https://4mf1valfp4.execute-api.us-east-1.amazonaws.com/prd'
     description: Production server
 paths:
   /v1/market/histogram/bond:
