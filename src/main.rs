@@ -460,11 +460,6 @@ mod tests {
     #[test]
     fn test_histogram() {
         let histogram = bin(5.0, 8.0, 2.0, &vec![5.0, 8.0, 7.0]);
-        /* for (key, value) in &histogram{
-            println!("this is key: {}", key);
-            println!("this is value: {}",value);
-        }*/
-
         assert_eq!(histogram.contains_key("5.0000-6.5000"), true);
         assert_eq!(histogram.contains_key("6.5000-8.0000"), true);
         assert_eq!(histogram.get("5.0000-6.5000").unwrap(), &1);
@@ -494,14 +489,6 @@ mod tests {
         let sig = 0.001; //to ensure not too great variability
         let t = 50.0;
         let simulation = generate_vasicek(r, a, b, sig, t);
-        /*let func_to_sim=|random_number:f64|{
-            let r_t=simulation(random_number);
-            hull_white::bond_price_t(
-                r_t, a, sigma, t,
-                maturity, &yield_fn,
-                &forward_fn
-            )
-        };*/
         let n = 500;
         let results = mc_results(n, &simulation);
         let average_result = results.iter().fold(0.0, |a, b| a + b) / (n as f64);
@@ -530,6 +517,106 @@ mod tests {
         println!("this is average: {}", average_result);
         assert_eq!(average_result < 0.961, true);
         assert_eq!(average_result > 0.960, true);
+    }
+    #[test]
+    fn edf_simulation() {
+        let r = 0.04;
+        let a = 0.3;
+        let b = 0.05;
+        let sig = 0.001; //to ensure not too great variability
+        let t = transform_days_to_year(10.0);
+        let maturity = 1.0;
+        let delta = 0.25;
+        let simulation = generate_vasicek(r, a, b, sig, t);
+        let yield_fn = yield_curve(r, a, b, sig);
+        let forward_fn = forward_curve(r, a, b, sig);
+        let func_to_sim = |random_number: f64| {
+            let r_t = simulation(random_number);
+            hull_white::euro_dollar_future_t(
+                r_t,
+                a,
+                sig,
+                t,
+                maturity,
+                delta,
+                &yield_fn,
+                &forward_fn,
+            )
+        };
+        let n = 500;
+        let results = mc_results(n, &func_to_sim);
+        let average_result = results.iter().fold(0.0, |a, b| a + b) / (n as f64);
+        println!("this is average: {}", average_result);
+        assert_eq!(average_result < 0.044, true);
+        assert_eq!(average_result > 0.042, true);
+    }
+    #[test]
+    fn bondcall_simulation() {
+        let r = 0.04;
+        let a = 0.3;
+        let b = 0.05;
+        let sig = 0.001; //to ensure not too great variability
+        let t = transform_days_to_year(10.0);
+        let maturity = 1.0;
+        let bond_maturity = 1.25;
+        let strike = 0.97;
+        let simulation = generate_vasicek(r, a, b, sig, t);
+        let yield_fn = yield_curve(r, a, b, sig);
+        let forward_fn = forward_curve(r, a, b, sig);
+        let func_to_sim = |random_number: f64| {
+            let r_t = simulation(random_number);
+            hull_white::bond_call_t(
+                r_t,
+                a,
+                sig,
+                t,
+                maturity,
+                bond_maturity,
+                strike,
+                &yield_fn,
+                &forward_fn,
+            )
+        };
+        let n = 500;
+        let results = mc_results(n, &func_to_sim);
+        let average_result = results.iter().fold(0.0, |a, b| a + b) / (n as f64);
+        println!("this is average: {}", average_result);
+        assert_eq!(average_result < 0.019, true);
+        assert_eq!(average_result > 0.017, true);
+    }
+    #[test]
+    fn bondput_simulation() {
+        let r = 0.04;
+        let a = 0.3;
+        let b = 0.05;
+        let sig = 0.001; //to ensure not too great variability
+        let t = transform_days_to_year(10.0);
+        let maturity = 1.0;
+        let bond_maturity = 1.25;
+        let strike = 0.995;
+        let simulation = generate_vasicek(r, a, b, sig, t);
+        let yield_fn = yield_curve(r, a, b, sig);
+        let forward_fn = forward_curve(r, a, b, sig);
+        let func_to_sim = |random_number: f64| {
+            let r_t = simulation(random_number);
+            hull_white::bond_put_t(
+                r_t,
+                a,
+                sig,
+                t,
+                maturity,
+                bond_maturity,
+                strike,
+                &yield_fn,
+                &forward_fn,
+            )
+        };
+        let n = 500;
+        let results = mc_results(n, &func_to_sim);
+        let average_result = results.iter().fold(0.0, |a, b| a + b) / (n as f64);
+        println!("this is average: {}", average_result);
+        assert_eq!(average_result < 0.006, true);
+        assert_eq!(average_result > 0.005, true);
     }
     #[test]
     fn min_v_test() {

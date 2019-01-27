@@ -36,12 +36,12 @@
             "example": 0.25,
             "description": "Floating tenor"
         },
-        "swap_tenor":{
+        "swapTenor":{
             "type": "number",
             "example": 5.0,
             "description": "Swap tenor (years)"
         },
-        "swap_rate":{
+        "swapRate":{
             "type": "number",
             "example": 0.02,
             "description": "Swap rate"
@@ -55,7 +55,9 @@
         "sigma",
         "maturity",
         "tenor",
-        "swap_rate"
+        "swapTenor",
+        "swapRate"
+        
     ],
     "type": "object"
 }

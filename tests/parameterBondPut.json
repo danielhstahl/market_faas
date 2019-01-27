@@ -1,5 +1,5 @@
 {
-    "body":"{\"t\":10,\"r0\":0.04, \"a\":0.4,\"b\":0.05,\"sigma\":0.05,\"maturity\":1.0, \"underlying_maturity\":1.25, \"strike\":0.97}",
+    "body":"{\"t\":10,\"r0\":0.04, \"a\":0.4,\"b\":0.05,\"sigma\":0.05,\"maturity\":1.0, \"underlyingMaturity\":1.25, \"strike\":0.97}",
     "path":"/realoptions/v1/market/histogram/bondput",
     "httpMethod":"POST",
     "headers": {

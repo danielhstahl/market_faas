@@ -14,7 +14,7 @@ describe('bond', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -37,7 +37,7 @@ describe('bondcall', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -60,7 +60,7 @@ describe('bondput', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -83,7 +83,7 @@ describe('caplet', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -106,7 +106,7 @@ describe('edf', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -129,7 +129,7 @@ describe('swap', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -152,7 +152,7 @@ describe('european swaption', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })
@@ -175,7 +175,7 @@ describe('american swaption', ()=>{
                 throw(err)
             }
             const res=JSON.parse(JSON.parse(result).body)
-            expect(Object.keys(res).length).toBeGreaterThan(0)
+            expect(Object.keys(res).length).toBeGreaterThan(1) //one means it errored
             done()
         })
     })

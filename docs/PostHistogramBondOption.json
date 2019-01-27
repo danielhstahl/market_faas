@@ -31,7 +31,7 @@
             "example": 1.0,
             "description": "Option maturity  (years)"
         },
-        "underlying_maturity":{
+        "underlyingMaturity":{
             "type": "number",
             "example": 1.25,
             "description": "Maturity of underlying bond (years)"
@@ -49,7 +49,7 @@
         "b",
         "sigma",
         "maturity",
-        "underlying_maturity",
+        "underlyingMaturity",
         "strike"
     ],
     "type": "object"

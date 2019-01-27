@@ -181,7 +181,7 @@ paths:
                   type: number
                   example: 1
                   description: Option maturity  (years)
-                underlying_maturity:
+                underlyingMaturity:
                   type: number
                   example: 1.25
                   description: Maturity of underlying bond (years)
@@ -196,7 +196,7 @@ paths:
                 - b
                 - sigma
                 - maturity
-                - underlying_maturity
+                - underlyingMaturity
                 - strike
               type: object
   /v1/market/histogram/bondput:
@@ -336,7 +336,7 @@ paths:
                   type: number
                   example: 0.25
                   description: Floating tenor
-                swap_rate:
+                swapRate:
                   type: number
                   example: 0.02
                   description: Swap rate
@@ -348,7 +348,7 @@ paths:
                 - sigma
                 - maturity
                 - tenor
-                - swap_rate
+                - swapRate
               type: object
   /v1/market/histogram/swaption:
     post:
@@ -401,11 +401,11 @@ paths:
                   type: number
                   example: 0.25
                   description: Floating tenor
-                swap_tenor:
+                swapTenor:
                   type: number
                   example: 5
                   description: Swap tenor (years)
-                swap_rate:
+                swapRate:
                   type: number
                   example: 0.02
                   description: Swap rate
@@ -417,7 +417,8 @@ paths:
                 - sigma
                 - maturity
                 - tenor
-                - swap_rate
+                - swapTenor
+                - swapRate
               type: object
   /v1/market/histogram/americanswaption:
     post:
