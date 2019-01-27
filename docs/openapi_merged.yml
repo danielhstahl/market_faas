@@ -1,44 +1,33 @@
 openapi: 3.0.0
 info:
-  title: Credit Risk Demo
-  description: Demonstration for finding the density of a credit portfolio
+  title: Market Risk Demo
+  description: >-
+    Demonstration for finding the histogram for several interest rate sensitive
+    assets.
   version: '1'
 servers:
   - url: null
     description: Production server
 paths:
-  /v1/credit/density:
+  /v1/market/histogram/bond:
     post:
-      summary: Computes the loss density of a loan portfolio
-      description: Computes the loss density of a loan portfolio
+      summary: Computes the histogram for bond prices
+      description: Computes the histogram for bond prices
       responses:
         '200':
-          description: Density at points
+          description: Histogram
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    density:
-                      type: number
-                    at_point:
-                      type: number
-                  required:
-                    - density
-                    - at_point
-                  additionalProperties: false
-              example:
-                - density: 5
-                  at_point: 0
-                - density: 3
-                  at_point: 1
+              schema: &ref_0
+                type: object
+              example: &ref_1
+                5.0000-5.5000: 10
+                5.5000-6.0000: 5
         '400':
           description: Error for incorrect request
           content:
             application/json:
-              schema:
+              schema: &ref_2
                 type: object
                 properties:
                   err:
@@ -53,29 +42,401 @@ paths:
             schema:
               additionalProperties: false
               properties:
-                lambda:
-                  type: number
-                  example: 0.05
-                q:
-                  type: number
-                  example: 0.05
-                numU:
+                t:
                   type: integer
-                  example: 128
-                pd:
+                  example: 10
+                  description: Simulate to (days)
+                r0:
+                  type: number
+                  example: 0.04
+                  description: Current short rate
+                a:
+                  type: number
+                  example: 0.3
+                  description: Mean reversion
+                b:
+                  type: number
+                  example: 0.05
+                  description: Long run average rate
+                sigma:
+                  type: number
+                  example: 0.05
+                  description: Volatility of rate
+                maturity:
+                  type: number
+                  example: 1
+                  description: Bond maturity (years)
+              required:
+                - t
+                - r0
+                - a
+                - b
+                - sigma
+                - maturity
+              type: object
+  /v1/market/histogram/edf:
+    post:
+      summary: Computes the histogram for Euro Dollar Future prices
+      description: Computes the histogram for Euro Dollar Future prices
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                t:
+                  type: integer
+                  example: 10
+                  description: Simulate to (days)
+                r0:
+                  type: number
+                  example: 0.04
+                  description: Current short rate
+                a:
+                  type: number
+                  example: 0.3
+                  description: Mean reversion
+                b:
+                  type: number
+                  example: 0.05
+                  description: Long run average rate
+                sigma:
+                  type: number
+                  example: 0.05
+                  description: Volatility of rate
+                maturity:
+                  type: number
+                  example: 1
+                  description: EDF maturity (years)
+                tenor:
+                  type: number
+                  example: 0.25
+                  description: Floating tenor
+              required:
+                - t
+                - r0
+                - a
+                - b
+                - sigma
+                - maturity
+                - tenor
+              type: object
+  /v1/market/histogram/bondcall:
+    post:
+      summary: Computes the histogram for call options on zero-coupon bonds
+      description: Computes the histogram for call options on zero-coupon bonds
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: &ref_3
+              additionalProperties: false
+              properties:
+                t:
+                  type: integer
+                  example: 10
+                  description: Simulate to (days)
+                r0:
+                  type: number
+                  example: 0.04
+                  description: Current short rate
+                a:
+                  type: number
+                  example: 0.3
+                  description: Mean reversion
+                b:
+                  type: number
+                  example: 0.05
+                  description: Long run average rate
+                sigma:
+                  type: number
+                  example: 0.05
+                  description: Volatility of rate
+                maturity:
+                  type: number
+                  example: 1
+                  description: Option maturity  (years)
+                underlying_maturity:
+                  type: number
+                  example: 1.25
+                  description: Maturity of underlying bond (years)
+                strike:
+                  type: number
+                  example: 0.97
+                  description: Strike
+              required:
+                - t
+                - r0
+                - a
+                - b
+                - sigma
+                - maturity
+                - underlying_maturity
+                - strike
+              type: object
+  /v1/market/histogram/bondput:
+    post:
+      summary: Computes the histogram for put options on zero-coupon bonds
+      description: Computes the histogram for put options on zero-coupon bonds
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: *ref_3
+  /v1/market/histogram/caplet:
+    post:
+      summary: Computes the histogram for caplets
+      description: Computes the histogram for caplets
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                t:
+                  type: integer
+                  example: 10
+                  description: Simulate to (days)
+                r0:
+                  type: number
+                  example: 0.04
+                  description: Current short rate
+                a:
+                  type: number
+                  example: 0.3
+                  description: Mean reversion
+                b:
+                  type: number
+                  example: 0.05
+                  description: Long run average rate
+                sigma:
+                  type: number
+                  example: 0.05
+                  description: Volatility of rate
+                maturity:
+                  type: number
+                  example: 1
+                  description: Option maturity (years)
+                tenor:
+                  type: number
+                  example: 0.25
+                  description: Floating tenor
+                strike:
                   type: number
                   example: 0.02
-                numLoans:
-                  type: integer
-                  example: 100000
-                volatility:
-                  type: number
-                  example: 0.5
+                  description: Strike
               required:
-                - lambda
-                - q
-                - numU
-                - pd
-                - numLoans
-                - volatility
+                - t
+                - r0
+                - a
+                - b
+                - sigma
+                - maturity
+                - tenor
+                - strike
               type: object
+  /v1/market/histogram/swap:
+    post:
+      summary: Computes the histogram for swaps
+      description: Computes the histogram for swaps
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                t:
+                  type: integer
+                  example: 10
+                  description: Simulate to (days)
+                r0:
+                  type: number
+                  example: 0.04
+                  description: Current short rate
+                a:
+                  type: number
+                  example: 0.3
+                  description: Mean reversion
+                b:
+                  type: number
+                  example: 0.05
+                  description: Long run average rate
+                sigma:
+                  type: number
+                  example: 0.05
+                  description: Volatility of rate
+                maturity:
+                  type: number
+                  example: 1
+                  description: Swap maturity (years)
+                tenor:
+                  type: number
+                  example: 0.25
+                  description: Floating tenor
+                swap_rate:
+                  type: number
+                  example: 0.02
+                  description: Swap rate
+              required:
+                - t
+                - r0
+                - a
+                - b
+                - sigma
+                - maturity
+                - tenor
+                - swap_rate
+              type: object
+  /v1/market/histogram/swaption:
+    post:
+      summary: Computes the histogram for European payer swaptions
+      description: Computes the histogram for European payer swaptions
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: &ref_4
+              additionalProperties: false
+              properties:
+                t:
+                  type: integer
+                  example: 10
+                  description: Simulate to (days)
+                r0:
+                  type: number
+                  example: 0.04
+                  description: Current short rate
+                a:
+                  type: number
+                  example: 0.3
+                  description: Mean reversion
+                b:
+                  type: number
+                  example: 0.05
+                  description: Long run average rate
+                sigma:
+                  type: number
+                  example: 0.05
+                  description: Volatility of rate
+                maturity:
+                  type: number
+                  example: 1
+                  description: Swap maturity (years)
+                tenor:
+                  type: number
+                  example: 0.25
+                  description: Floating tenor
+                swap_tenor:
+                  type: number
+                  example: 5
+                  description: Swap tenor (years)
+                swap_rate:
+                  type: number
+                  example: 0.02
+                  description: Swap rate
+              required:
+                - t
+                - r0
+                - a
+                - b
+                - sigma
+                - maturity
+                - tenor
+                - swap_rate
+              type: object
+  /v1/market/histogram/americanswaption:
+    post:
+      summary: Computes the histogram for American payer swaptions
+      description: Computes the histogram for American payer swaptions
+      responses:
+        '200':
+          description: Histogram
+          content:
+            application/json:
+              schema: *ref_0
+              example: *ref_1
+        '400':
+          description: Error for incorrect request
+          content:
+            application/json:
+              schema: *ref_2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: *ref_4
