@@ -180,12 +180,19 @@ where T:Fn(f64)->f64+std::marker::Sync
         }).collect()
 }
 
+fn min_v(results:&[f64])->f64{
+    results.iter().fold(f64::INFINITY, |a, &b| a.min(b))
+}
+fn max_v(results:&[f64])->f64{
+    results.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b))
+}
+
 fn mc<T>(num_sims:usize, func_to_sim:T)->HashMap<String, usize>
 where T:Fn(f64)->f64+std::marker::Sync
 {
     let results=mc_results(num_sims, &func_to_sim);
-    let min = results.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max = results.iter().fold(f64::NEG_INFINITY, |a, &b| a.min(b));
+    let min = min_v(&results);
+    let max = max_v(&results);
     combine_and_bin(min, max, &results)
 }
 
@@ -432,8 +439,8 @@ mod tests {
         let a=0.3;
         let b=0.05;
         let sig=0.001; //to ensure not too great variability
-        let t=10.0/365.0;
-        let maturity=50.0;
+        let t=transform_days_to_year(10.0);
+        let maturity=1.0;
         let simulation=generate_vasicek(r, a, b, sig, t);
         let yield_fn=yield_curve(r, a, b, sig);
         let forward_fn=forward_curve(r, a, b, sig);
@@ -449,8 +456,22 @@ mod tests {
         let results=mc_results(n, &func_to_sim);
         let average_result=results.iter().fold(0.0, |a, b|a+b)/(n as f64);
         println!("this is average: {}", average_result);
-        assert_eq!(average_result<0.052, true);
-        assert_eq!(average_result>0.048, true);
+        assert_eq!(average_result<0.961, true);
+        assert_eq!(average_result>0.960, true);
+
+    }
+    #[test]
+    fn min_v_test(){
+        let v=vec![4.0, 2.0, 5.0];
+        let result=min_v(&v);
+        assert_eq!(result, 2.0);
+
+    }
+    #[test]
+    fn max_v_test(){
+        let v=vec![4.0, 2.0, 5.0];
+        let result=max_v(&v);
+        assert_eq!(result, 5.0);
 
     }
 }

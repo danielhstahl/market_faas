@@ -38,7 +38,7 @@
         },
         "swap_tenor":{
             "type": "number",
-            "example": 5.00,
+            "example": 5.0,
             "description": "Swap tenor (years)"
         },
         "swap_rate":{
