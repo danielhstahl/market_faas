@@ -60,11 +60,11 @@ deploy:
     api_key: ${github_token}
     file_glob: true
     file:
-    - "./ops_faas.zip"
+    - "./market_faas.zip"
     - "./serverless.yml"
     - "./docs/openapi_merged.yml"
     skip_cleanup: true
     on:
-      repo: phillyfan1138/ops_faas
+      repo: phillyfan1138/market_faas
       tags: true
       rust: 'stable'
