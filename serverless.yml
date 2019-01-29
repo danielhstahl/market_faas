@@ -9,6 +9,7 @@ package:
 functions:
   calculator:
     handler: doesntmatter #because runtime is provided
+    timeout: 30
     package:
       artifact: market_faas.zip
     events:
