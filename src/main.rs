@@ -1,17 +1,11 @@
-#[macro_use]
-extern crate serde_derive;
-#[macro_use]
-extern crate serde_json;
-extern crate rand;
+use serde_derive::Deserialize;
+use serde_json::json;
+
+use lambda_http::{lambda, Body, IntoResponse, Request, RequestExt, Response};
+use lambda_runtime::{error::HandlerError, Context};
 use rand::distributions::StandardNormal;
 use rand::{thread_rng, Rng};
-extern crate hull_white;
-extern crate lambda_http;
-extern crate lambda_runtime as runtime;
-extern crate rayon;
-use self::rayon::prelude::*;
-use lambda_http::{lambda, Body, IntoResponse, Request, RequestExt, Response};
-use runtime::{error::HandlerError, Context};
+use rayon::prelude::*;
 use std::collections::HashMap;
 use std::error::Error;
 use std::f64;
