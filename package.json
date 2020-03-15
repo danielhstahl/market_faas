@@ -24,18 +24,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phillyfan1138/credit_faas.git"
+    "url": "git+https://github.com/phillyfan1138/market_faas.git"
   },
   "author": "Daniel Stahl",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/phillyfan1138/credit_faas/issues"
+    "url": "https://github.com/phillyfan1138/market_faas/issues"
   },
-  "homepage": "https://github.com/phillyfan1138/credit_faas#readme",
+  "homepage": "https://github.com/phillyfan1138/market_faas#readme",
   "devDependencies": {
-    "husky": "^1.3.1",
-    "jest": "^24.8.0",
-    "js-yaml": "^3.13.1",
-    "json-refs": "^3.0.12"
+    "@apidevtools/json-schema-ref-parser": "^8.0.0",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "yaml": "^1.8.2"
   }
 }
