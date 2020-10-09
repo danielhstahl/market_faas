@@ -1,8 +1,8 @@
 name: release
 on:
   push:
-    tags:
-    - '*'
+    branches:
+      master
 
 jobs:
   release: 
@@ -18,6 +18,13 @@ jobs:
         npm ci
         npm test 
 
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.26.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+      id: tag_bump
+
     - name: deploy aws
       run: |
         node ./src/js/copyBinaries
@@ -26,12 +33,15 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         
-    - name: release files
-      uses: ncipollo/release-action@v1
+    - name: Upload to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        artifacts: "./market_faas.zip,./serverless.yml,./docs/openapi_merged.yml"
-        # bodyFile: "body.md"
-        token: ${{ secrets.ACCESS_TOKEN }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./docs/*.yml
+        tag: ${{ steps.tag_bump.outputs.new_tag }}
+        release_name: release ${{ steps.tag_bump.outputs.new_tag }}
+        overwrite: true
+        file_glob: true
 
     
     
