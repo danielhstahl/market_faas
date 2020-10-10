@@ -144,8 +144,9 @@ fn bin(min: f64, max: f64, num_bins: f64, elements: &[f64]) -> HashMap<String, u
     bins
 }
 
+const ONE_THIRD: f64 = 1.0 / 3.0;
 fn combine_and_bin(min: f64, max: f64, elements: &[f64]) -> HashMap<String, usize> {
-    let num_bins = (2.0 * (elements.len() as f64).powf(1.0 / 3.0)).floor();
+    let num_bins = (2.0 * (elements.len() as f64).powf(ONE_THIRD)).floor();
     bin(min, max, num_bins, elements)
 }
 
