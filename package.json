@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phillyfan1138/market_faas.git"
+    "url": "git+https://github.com/danielhstahl/market_faas.git"
   },
   "author": "Daniel Stahl",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/phillyfan1138/market_faas/issues"
+    "url": "https://github.com/danielhstahl/market_faas/issues"
   },
-  "homepage": "https://github.com/phillyfan1138/market_faas#readme",
+  "homepage": "https://github.com/danielhstahl/market_faas#readme",
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^8.0.0",
     "husky": "^4.2.3",
