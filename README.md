@@ -2,10 +2,10 @@
 | :---------------: | :-------------------: |
 | ![lin-badge]      | ![cov-badge]          |
 
-[lin-badge]: https://github.com/phillyfan1138/market_faas/workflows/test/badge.svg
-[lin-link]:  https://github.com/phillyfan1138/market_faas/actions
-[cov-badge]: https://codecov.io/gh/phillyfan1138/market_faas/branch/master/graph/badge.svg
-[cov-link]:  https://codecov.io/gh/phillyfan1138/market_faas
+[lin-badge]: https://github.com/danielhstahl/market_faas/workflows/test/badge.svg
+[lin-link]:  https://github.com/danielhstahl/market_faas/actions
+[cov-badge]: https://codecov.io/gh/danielhstahl/market_faas/branch/master/graph/badge.svg
+[cov-link]:  https://codecov.io/gh/danielhstahl/market_faas
 
 ## How to build
 
