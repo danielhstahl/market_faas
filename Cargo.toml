@@ -16,4 +16,4 @@ lambda_runtime = "0.2.1"
 rand = "0.6.4"
 
 [badges]
-travis-ci = { repository = "phillyfan1138/market_faas" }
+travis-ci = { repository = "danielhstahl/market_faas" }
