@@ -35,6 +35,7 @@ jobs:
           zip -0 ccov.zip `find . \( -name "${CRATE_NAME}*.gc*" \) -print`
           ./grcov ccov.zip -s . -t lcov --llvm --branch --ignore-not-existing --ignore "/*" -o lcov.info
       - name: Coveralls
+        if: matrix.rust == 'nightly' 
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
