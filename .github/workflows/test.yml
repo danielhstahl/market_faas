@@ -31,7 +31,7 @@ jobs:
         run: |
           cargo build --verbose $CARGO_OPTIONS
           cargo test --verbose $CARGO_OPTIONS
-          curl -L https://github.com/mozilla/grcov/releases/download/v0.5.15/grcov-linux-x86_64.tar.bz2 | tar jxf -
+          curl -L https://github.com/mozilla/grcov/releases/download/v0.7.1/grcov-linux-x86_64.tar.bz2 | tar jxf -
           ./grcov . --binary-path ./target/debug/ -t coveralls -s . --token ${{ secrets.COVERALLS_TOKEN }} > coveralls.json
     integrations:
       runs-on: ubuntu-latest
@@ -43,3 +43,5 @@ jobs:
             docker pull lambci/lambda:provided
             npm ci
             npm test
+
+            
