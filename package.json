@@ -35,7 +35,7 @@
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^8.0.0",
     "husky": "^4.2.3",
-    "jest": "^25.1.0",
+    "jest": "^29.3.1",
     "yaml": "^1.8.2"
   }
 }
