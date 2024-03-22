@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run cargo test
       run: cargo test
-    - uses: phillyfan1138/musl-rust-action@master
+    - uses: danielhstahl/musl-rust-action@master
     - name: Integration test
       run: |
         docker pull lambci/lambda:provided
