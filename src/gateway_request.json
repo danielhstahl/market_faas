@@ -1,7 +1,5 @@
 {
-    "body": "{\"t\":10,\"r0\":0.04, \"a\":0.4,\"b\":0.05,\"sigma\":0.05,\"maturity\":1.0, \"tenor\":0.25, \"numSwapPayments\":16, \"swapRate\":0.02}",
-    "path": "/realoptions/v1/market/histogram/americanswaption",
-    "httpMethod": "POST",
+    "path": "/hello",
     "headers": {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding": "gzip, deflate, lzma, sdch, br",
@@ -21,33 +19,39 @@
         "X-Forwarded-Port": "443",
         "X-Forwarded-Proto": "https"
     },
-    "queryStringParameters": null,
     "pathParameters": {
-        "asset": "americanswaption"
-    },
-    "stageVariables": {
-        "stageVarName": "stageVarValue"
+        "asset": "bond"
     },
     "requestContext": {
-        "resourceId": "123456",
-        "apiId": "1234567890",
-        "resourcePath": "/",
-        "httpMethod": "GET",
-        "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
         "accountId": "123456789012",
+        "resourceId": "us4z18",
+        "stage": "test",
+        "requestId": "41b45ea3-70b5-11e6-b7bd-69b5aaebc7d9",
+        "requestTimeEpoch": 1583798639428,
         "identity": {
-            "apiKey": null,
-            "userArn": null,
-            "cognitoAuthenticationType": null,
-            "caller": null,
-            "userAgent": "Custom User Agent String",
-            "user": null,
-            "cognitoIdentityPoolId": null,
-            "cognitoIdentityId": null,
-            "cognitoAuthenticationProvider": null,
-            "sourceIp": "127.0.0.1",
-            "accountId": null
+            "cognitoIdentityPoolId": "",
+            "accountId": "",
+            "cognitoIdentityId": "",
+            "caller": "",
+            "apiKey": "",
+            "sourceIp": "192.168.100.1",
+            "cognitoAuthenticationType": "",
+            "cognitoAuthenticationProvider": "",
+            "userArn": "",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36 OPR/39.0.2256.48",
+            "user": ""
         },
-        "stage": "prod"
+        "resourcePath": "/{proxy+}",
+        "httpMethod": "GET",
+        "apiId": "wt6mne2s9k"
+    },
+    "resource": "/{proxy+}",
+    "httpMethod": "GET",
+    "queryStringParameters": {
+        "name": "me"
+    },
+    "body": "{\"t\": 10,\"r0\": 0.04,\"a\": 0.3,\"b\": 0.05,\"sigma\": 0.1,\"maturity\": 1}",
+    "stageVariables": {
+        "stageVarName": "stageVarValue"
     }
 }
